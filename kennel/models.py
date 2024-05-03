@@ -6,7 +6,6 @@ from dateutil.relativedelta import relativedelta
 
 
 class Affixe(models.Model):
-
 	nom = models.CharField(max_length=100)
 
 	def __str__(self):
@@ -25,12 +24,24 @@ class Kennel(models.Model):
 	    ('F', 'Femelle'),
 	)
 
+	COLOR_CHOICES = (
+		('N', 'Noir'), ('NB', 'Noir et Blanc'),
+	    ('TC', 'Tricolore'), ('DB', 'Doré et Blanc'))
+
 	nom = models.CharField(max_length=255)
-	affixe = models.ForeignKey(Affixe, on_delete=models.CASCADE, default=None)
+	affixe = models.ForeignKey(Affixe,
+							on_delete=models.CASCADE,
+							default=None)
 	surnom = models.CharField(max_length=50)
-	sexe = models.CharField(max_length=1, choices=SEXE_CHOICES, default='M')
+	sexe = models.CharField(max_length=1,
+							choices=SEXE_CHOICES,
+							default='M')
+	couleur = models.CharField(max_length=2,
+	                        choices=COLOR_CHOICES,
+	                        default='TC')
 	dob = models.DateField()
-	puce = models.CharField(max_length=18, validators=[validate_puce])
+	puce = models.CharField(max_length=18,
+							validators=[validate_puce])
 
 	def __str__(self):
 		return str(self.surnom)

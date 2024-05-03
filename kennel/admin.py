@@ -5,7 +5,9 @@ from .models import Kennel, Affixe
 
 
 class KennelAdmin(admin.ModelAdmin):
-	list_display = ['surnom', 'nom', 'affixe', 'sexe', 'dob', 'age', 'puce']
+	list_display = [
+	    'surnom', 'nom', 'affixe', 'sexe', 'couleur', 'dob', 'age', 'puce'
+	]
 
 
 class AffixeAdmin(admin.ModelAdmin):
