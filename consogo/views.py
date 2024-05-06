@@ -2,4 +2,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-	return HttpResponse("Bienvenue sur Conso Go")
+    return HttpResponse("Bienvenue sur Conso Go")
