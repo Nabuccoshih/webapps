@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path('compta/', include('compta.urls')),
     path('consogo/', include('consogo.urls')),
     path('kennel/', include('kennel.urls')),
     path('admin/', admin.site.urls),

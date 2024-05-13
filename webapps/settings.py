@@ -32,6 +32,7 @@ CSRF_TRUSTED_ORIGINS = ["https://*.replit.dev", "https://*.replit.app"]
 INSTALLED_APPS = [
     'consogo.apps.ConsogoConfig',
     'kennel.apps.KennelConfig',
+    'compta.apps.ComptaConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
