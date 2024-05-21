@@ -12,9 +12,15 @@ SEXE_CHOICES = (
 COLOR_CHOICES = (('N', 'Noir'), ('NB', 'Noir et Blanc'), ('TC', 'Tricolore'),
                  ('DB', 'Doré et Blanc'))
 
+POS_CHOICES = (
+    ('P', 'Préfixe'),
+    ('S', 'Suffixe'),
+)
+
 
 class Affixe(models.Model):
     nom = models.CharField(max_length=100)
+    position = models.CharField(max_length=1, choices=POS_CHOICES, default='S')
 
     def __str__(self):
         return str(self.nom)

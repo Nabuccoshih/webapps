@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.db.models import Sum
-
 from .models import Categorie, Operation
 
 
@@ -9,16 +8,23 @@ class CategorieAdmin(admin.ModelAdmin):
 
 
 class OperationAdmin(admin.ModelAdmin):
+
     list_display = [
         'date', 'libelle', 'montant_devise', 'moyen_paiement', 'categorie',
-        'pointage', 'total_montant'
+        'pointage'
     ]
+
+    list_filter = ['categorie', 'moyen_paiement']
+
+    actions = None
 
     def montant_devise(self, obj):
         return f"{obj.montant} €"
 
     def total_montant(self, obj):
-        total = Operation.objects.aggregate(Sum('montant'))['montant__sum']
+        categorie = obj.categorie
+        total = Operation.objects.filter('Alimentation').aggregate(
+            Sum('montant'))['montant__sum'] or 0
         return total
 
 
