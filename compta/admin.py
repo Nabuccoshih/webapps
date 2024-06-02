@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db.models import Sum
-from .models import Categorie, Operation
+from .models import Categorie, Operation, Direction
 
 
 class CategorieAdmin(admin.ModelAdmin):
@@ -10,7 +10,7 @@ class CategorieAdmin(admin.ModelAdmin):
 class OperationAdmin(admin.ModelAdmin):
 
     list_display = [
-        'date', 'libelle', 'montant_devise', 'moyen_paiement', 'categorie',
+        'date', 'libelle', 'moyen_paiement', 'categorie', 'montant_devise',
         'pointage'
     ]
 
@@ -27,6 +27,9 @@ class OperationAdmin(admin.ModelAdmin):
             Sum('montant'))['montant__sum'] or 0
         return total
 
+class DirectionAdmin(admin.ModelAdmin):
+    list_display = ['debit', 'credit']
 
 admin.site.register(Categorie, CategorieAdmin)
 admin.site.register(Operation, OperationAdmin)
+admin.site.register(Direction, DirectionAdmin)

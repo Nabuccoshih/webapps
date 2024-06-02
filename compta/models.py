@@ -28,11 +28,28 @@ class Operation(models.Model):
     moyen_paiement = models.CharField(max_length=3,
                                       choices=MOY_PAIEM_CHOICES,
                                       default='CB')
-    categorie = models.ForeignKey(Categorie, on_delete=models.DO_NOTHING)
-    destination = models.ForeignKey(Chien, on_delete=models.DO_NOTHING)
+    categorie = models.ForeignKey(Categorie,
+                                  on_delete=models.SET_NULL,
+                                  null=True)
+    destination = models.ForeignKey(Chien,
+                                    on_delete=models.SET_NULL,
+                                    null=True,
+                                    blank=True)
+
     pointage = models.CharField(max_length=3,
                                 choices=POINT_CHOICES,
                                 default='non')
 
     def __str__(self):
         return str(self.libelle)
+
+
+class Direction(models.Model):
+    debit = models.ForeignKey(Operation,
+                              related_name='direct_debit',
+                              on_delete=models.SET_NULL,
+                              null=True)
+    credit = models.ForeignKey(Operation,
+                               related_name='direct_credit',
+                               on_delete=models.SET_NULL,
+                               null=True)

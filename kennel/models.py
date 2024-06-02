@@ -34,7 +34,7 @@ class Chien(models.Model):
                 'Le champ puce doit contenir exactement 18 caractères.')
 
     nom = models.CharField(max_length=255)
-    affixe = models.ForeignKey(Affixe, on_delete=models.CASCADE, default=None)
+    affixe = models.ForeignKey(Affixe, on_delete=models.SET_NULL, null=True)
     surnom = models.CharField(max_length=50)
     sexe = models.CharField(max_length=1, choices=SEXE_CHOICES, default='M')
     couleur = models.CharField(max_length=2,
@@ -102,8 +102,8 @@ class Client(models.Model):
     email = models.EmailField(validators=[EmailValidator()])
     dobc = models.DateField()
     chiot_choisi = models.ForeignKey(Chiot,
-                                     on_delete=models.CASCADE,
-                                     default=None)
+                                     on_delete=models.SET_NULL,
+                                     null=True)
 
     def __str__(self):
         return str(self.nom)
@@ -114,12 +114,12 @@ class Portee(models.Model):
     dob = models.DateField()
     pere = models.ForeignKey(Chien,
                              related_name='portees_pere',
-                             on_delete=models.CASCADE,
-                             default=None)
+                             on_delete=models.SET_NULL,
+                             null=True)
     mere = models.ForeignKey(Chien,
                              related_name='portees_mere',
-                             on_delete=models.CASCADE,
-                             default=None)
+                             on_delete=models.SET_NULL,
+                             null=True)
     chiot = models.ManyToManyField(Chiot)
 
     def __str__(self):
