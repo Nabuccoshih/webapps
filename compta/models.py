@@ -44,12 +44,9 @@ class Operation(models.Model):
         return str(self.libelle)
 
 
-class Direction(models.Model):
-    debit = models.ForeignKey(Operation,
-                              related_name='direct_debit',
-                              on_delete=models.SET_NULL,
-                              null=True)
-    credit = models.ForeignKey(Operation,
-                               related_name='direct_credit',
-                               on_delete=models.SET_NULL,
-                               null=True)
+class Debit(models.Model):
+    debit = models.ForeignKey(Operation, on_delete=models.SET_NULL, null=True)
+
+
+class Credit(models.Model):
+    credit = models.ForeignKey(Operation, on_delete=models.SET_NULL, null=True)

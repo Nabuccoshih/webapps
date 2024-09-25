@@ -1,6 +1,5 @@
 from django.contrib import admin
-from django.db.models import Sum
-from .models import Categorie, Operation, Direction
+from .models import Categorie, Operation, Debit, Credit
 
 
 class CategorieAdmin(admin.ModelAdmin):
@@ -21,15 +20,16 @@ class OperationAdmin(admin.ModelAdmin):
     def montant_devise(self, obj):
         return f"{obj.montant} €"
 
-    def total_montant(self, obj):
-        categorie = obj.categorie
-        total = Operation.objects.filter('Alimentation').aggregate(
-            Sum('montant'))['montant__sum'] or 0
-        return total
 
-class DirectionAdmin(admin.ModelAdmin):
-    list_display = ['debit', 'credit']
+class DebitAdmin(admin.ModelAdmin):
+    list_display = ['debit']
+
+
+class CreditAdmin(admin.ModelAdmin):
+    list_display = ['credit']
+
 
 admin.site.register(Categorie, CategorieAdmin)
 admin.site.register(Operation, OperationAdmin)
-admin.site.register(Direction, DirectionAdmin)
+admin.site.register(Debit, DebitAdmin)
+admin.site.register(Credit, CreditAdmin)
